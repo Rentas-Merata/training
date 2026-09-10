@@ -5,17 +5,17 @@
   <title>Rentas — HR Zone & Pelan Larian</title>
   <meta name="description" content="Kenali HR zone anda, pilih menu latihan dan bina pelan larian mingguan. Mudah difahami, ikut kemampuan sendiri.">
   <meta name="theme-color" content="#115ce8">
-  <link rel="stylesheet" href="/style.css">
-  <link rel="stylesheet" href="/refinements.css">
-  <link rel="stylesheet" href="/brand-tools.css">
-  <script type="module" src="/app.mjs"></script>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./refinements.css">
+  <link rel="stylesheet" href="./brand-tools.css">
+  <script type="module" src="./app.mjs"></script>
 </head>
 <body>
   <a class="skip" href="#main">Terus ke kandungan</a>
-  <header class="topbar"><div class="top-inner"><a class="wordmark" href="/" aria-label="Rentas, halaman utama"><img class="wordmark-art" src="/assets/rentas-wordmark-transparent.png" alt="Rentas — Everywhere is a route."></a><a class="edition" href="/#about">ABOUT RENTAS</a><button id="auth-button" class="auth-button" type="button">Log masuk</button></div></header>
+  <header class="topbar"><div class="top-inner"><a class="wordmark" href="./" aria-label="Rentas, halaman utama"><img class="wordmark-art" src="./assets/rentas-wordmark-transparent.png" alt="Rentas — Everywhere is a route."></a><a class="edition" href="./#about">ABOUT RENTAS</a><button id="auth-button" class="auth-button" type="button">Log masuk</button></div></header>
   <main id="main" class="shell">
     <div class="page-heading"><div><p class="eyebrow">YOUR PACE. YOUR PROGRESS.</p><h1>Lari ikut kemampuan. Latih dengan tujuan.</h1><p>Kenali HR zone anda dan susun latihan ikut tahap, sasaran dan masa yang ada.</p></div><span class="audience-label">Untuk pelari dewasa · 18–85 tahun</span></div>
-    <nav class="section-nav" aria-label="Alat latihan"><a href="#zones" data-view="zones" class="active" aria-current="page"><span>01</span> HR Zone</a><a href="#workouts" data-view="workouts"><span>02</span> Menu latihan</a><a href="#planner" data-view="planner"><span>03</span> Pelan mingguan <small id="planner-lock" class="nav-lock" aria-label="Perlu log masuk">🔒</small></a><a href="/" class="home-link">← Utama</a></nav>
+    <nav class="section-nav" aria-label="Alat latihan"><a href="#zones" data-view="zones" class="active" aria-current="page"><span>01</span> HR Zone</a><a href="#workouts" data-view="workouts"><span>02</span> Menu latihan</a><a href="#planner" data-view="planner"><span>03</span> Pelan mingguan <small id="planner-lock" class="nav-lock" aria-label="Perlu log masuk">🔒</small></a><a href="./" class="home-link">← Utama</a></nav>
     <section id="zones-view" class="view" aria-labelledby="zones-title">
       <div class="section-title"><div><h2 id="zones-title">Kenali HR zone anda.</h2><p>Pilih satu kaedah, kemudian isi maklumat yang diperlukan.</p></div><span id="zone-basis-badge" class="method-label">HRR / KARVONEN</span></div>
       <div class="calculator-grid">
@@ -54,7 +54,7 @@
       <div class="info-strip"><span class="info-mark" aria-hidden="true">i</span><div><strong>Pelan permulaan, bukan jaminan masa perlumbaan.</strong><p>Rentas menyusun satu minggu berdasarkan input anda; bukan pelan progresif atau penilaian kesihatan. Ulang minggu yang selesa dahulu. Kurangkan atau rehat jika sakit atau terlalu letih. Jangan naikkan masa dan intensiti serentak.</p></div></div>
     </section>
     <aside class="safety-note"><strong>Dengar badan, bukan jam sahaja.</strong> Hentikan latihan jika sakit dada, hampir pitam atau sesak nafas luar biasa. Dapatkan rawatan segera jika simptom serius. Ini panduan umum, bukan nasihat perubatan peribadi.</aside>
-    <footer><span class="wordmark small"><img class="wordmark-art" src="/assets/rentas-wordmark-transparent.png" alt="Rentas — Everywhere is a route."></span><span>All paces are welcome.</span></footer>
+    <footer><span class="wordmark small"><img class="wordmark-art" src="./assets/rentas-wordmark-transparent.png" alt="Rentas — Everywhere is a route."></span><span>All paces are welcome.</span></footer>
   </main>
   <dialog id="workout-dialog" aria-labelledby="dialog-title"><div id="dialog-content"></div><button id="close-dialog" class="close-button" aria-label="Tutup butiran latihan">×</button></dialog>
   <dialog id="auth-dialog" aria-labelledby="auth-title"><div class="auth-dialog-content"><p class="dialog-eyebrow">RENTAS ACCOUNT</p><h2 id="auth-title">Simpan rutin anda.</h2><p id="auth-copy">Log masuk dengan email. Klik link pengesahan dalam email untuk masuk — tiada password diperlukan.</p><form id="auth-form"><label for="auth-email">Email</label><input id="auth-email" type="email" autocomplete="email" placeholder="nama@email.com" required><div id="profile-fields" hidden><label for="profile-name">Nama panggilan <span>(optional)</span></label><input id="profile-name" type="text" maxlength="60" autocomplete="name" placeholder="Contoh: Aizzuan"><label for="profile-goal">Fokus utama</label><select id="profile-goal"><option value="habit">Bina rutin</option><option value="5k">5KM</option><option value="10k">10KM</option></select></div><p id="auth-error" class="error" role="alert" hidden></p><button id="auth-submit" class="primary full" type="submit">Hantar link <span aria-hidden="true">↗</span></button></form><button id="auth-cancel" class="text-button" type="button">Tutup</button></div><button id="auth-close" class="close-button" aria-label="Tutup log masuk">×</button></dialog>
