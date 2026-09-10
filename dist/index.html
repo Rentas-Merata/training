@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Rentas — HR Zone & Pelan Larian</title>
+  <meta name="description" content="Kenali HR zone anda, pilih menu latihan dan bina pelan larian mingguan. Mudah difahami, ikut kemampuan sendiri.">
+  <meta name="theme-color" content="#115ce8">
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/app.mjs"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Terus ke kandungan</a>
+  <header class="topbar"><div class="top-inner"><a class="wordmark" href="#zones" aria-label="Rentas, halaman HR zone">RENTAS<span class="brand-slash" aria-hidden="true">/</span></a><span class="brand-description">RUNNING, AT YOUR PACE.</span><span class="edition">TRAINING TOOLS <span>V.01</span></span></div></header>
+  <main id="main" class="shell">
+    <div class="page-heading"><div><p class="eyebrow">YOUR PACE. YOUR PROGRESS.</p><h1>Lari dengan lebih faham.</h1><p>Kenali zone anda. Pilih latihan. Bina rutin yang boleh kekal.</p></div><span class="audience-label">Untuk pelari dewasa · 18–85 tahun</span></div>
+    <nav class="section-nav" aria-label="Alat latihan"><a href="#zones" data-view="zones" class="active" aria-current="page"><span>01</span> HR Zone</a><a href="#workouts" data-view="workouts"><span>02</span> Menu latihan</a><a href="#planner" data-view="planner"><span>03</span> Pelan mingguan</a></nav>
+    <section id="zones-view" class="view" aria-labelledby="zones-title">
+      <div class="section-title"><div><h2 id="zones-title">Easy ikut usaha. HR jadi panduan.</h2><p>Zone 2 bukan satu nombor yang sama untuk semua pelari.</p></div><span id="zone-basis-badge" class="method-label">HRR / KARVONEN</span></div>
+      <div class="calculator-grid">
+        <section class="card input-card" aria-labelledby="profile-title"><div class="card-heading"><span class="mini-icon" aria-hidden="true">01</span><h3 id="profile-title">Maklumat anda</h3></div>
+          <form id="hr-form"><label for="age">Umur</label><div class="unit-input"><input id="age" type="number" min="18" max="85" step="1" value="30" required aria-describedby="age-hint"><span>tahun</span></div><p id="age-hint" class="hint">Umur 30 ialah contoh. Tukar ikut umur anda.</p>
+          <label for="zone-basis">Kaedah kira zone</label><select id="zone-basis"><option value="hrr">HRR / Karvonen · ambil kira resting HR</option><option value="maxhr">% HR maksimum · kaedah asal</option></select><p class="hint">HRR memerlukan bacaan rehat anda. Ia bukan pelarasan khas untuk cuaca panas.</p>
+          <label for="hr-method">Cara kira HR maksimum</label><select id="hr-method"><option value="tanaka">Ikut umur · Tanaka</option><option value="fox">Ikut umur · 220 − umur</option><option value="manual">Masukkan HR maksimum sendiri</option></select>
+          <div id="manual-field" hidden><label for="manual-max">HR maksimum yang diketahui</label><div class="unit-input"><input id="manual-max" type="number" min="100" max="240" step="1" value="190"><span>bpm</span></div><p class="hint">Gunakan nilai yang sah daripada penilaian atau rekod yang boleh dipercayai. Jangan buat ujian maksimum sendiri.</p></div>
+          <div id="resting-field"><label for="resting-hr">Resting HR · denyutan ketika rehat</label><div class="unit-input"><input id="resting-hr" type="number" min="30" max="100" step="1" required aria-describedby="resting-hint"><span>bpm</span></div><p id="resting-hint" class="hint">Isi bacaan sebenar ketika tenang, sebelum kopi atau latihan; bukan HR selepas warm-up. Julat input 30–100 ialah had alat ini, bukan pengesahan bacaan normal. Jika bacaan luar julat atau luar kebiasaan anda, jangan ubah nombor untuk lepas kalkulator.</p></div>
+          <div class="formula-card"><span>FORMULA ZONE</span><strong id="formula">Resting HR + (% × HR reserve)</strong><p id="formula-detail">HR reserve = HR maksimum − resting HR.</p><p id="max-formula-detail">HR maksimum: 208 − (0.7 × umur).</p></div>
+          <p id="hr-error" class="error" role="alert" hidden></p><button type="submit" class="primary full">Kira HR zone <span aria-hidden="true">↗</span></button></form>
+          <p class="privacy-note">Tiada akaun diperlukan. Input tidak dihantar ke pelayan dan akan reset bila halaman dimuat semula.</p>
+        </section>
+        <div class="results-column" id="hr-results" aria-live="polite"></div>
+      </div>
+      <div class="info-strip"><span class="info-mark" aria-hidden="true">i</span><div><strong>Panas & lembap: laraskan usaha, bukan naikkan had HR.</strong><p>Jantung bekerja lebih kuat untuk membantu menyejukkan badan. Berjalan laju juga boleh jadi latihan yang bermakna—masuk Zone 2 ketika berjalan bukan tanda anda gagal. Pilih waktu lebih sejuk, perlahan atau pendekkan sesi, dan rehat apabila perlu. Rentas tidak menambah “bonus bpm” untuk cuaca Malaysia.</p><p><a href="https://www.heart.org/en/health-topics/consumer-healthcare/what-is-cardiovascular-disease/protect-your-heart-in-the-heat" target="_blank" rel="noopener noreferrer">Panduan cuaca panas · American Heart Association</a></p></div></div>
+      <details class="reference-details"><summary>Kenapa Zone 2 berubah mengikut kaedah?</summary><div><p>%HRmaks menggunakan peratus daripada HR maksimum sahaja. HRR / Karvonen menggunakan resting HR + peratus × (HR maksimum − resting HR). Untuk peratus yang sama, HRR biasanya memberi bpm lebih tinggi. Ini perbezaan kiraan, bukan bukti bahawa intensiti lebih tinggi selamat atau masih easy.</p><p>Rentas memaparkan lima julat 50–60, 60–70, 70–80, 80–90 dan 90–100% bagi kaedah yang dipilih. Label Z2 = 60–70% ialah pembahagian paparan; ia tidak mengesahkan ambang aerobik anda. 60–70% HRR boleh terasa terlalu kuat untuk sesetengah pelari. Jangan pilih kaedah hanya untuk mendapatkan nombor lebih tinggi.</p><p>Untuk Easy, Recovery, LSD dan Run–Walk, panduan sesi kini menggunakan usaha dan pernafasan, bukan bpm wajib. Sesi hard kekal pada rujukan Z4 berasaskan %HRmaks asal; memilih HRR dalam kalkulator tidak menaikkan sasaran hard.</p><p>RPE ialah rasa usaha pada skala 0 (rehat) hingga 10 (maksimum). Rentas menggunakan sekitar 3–4 untuk easy, bersama kebolehan berbual dengan selesa. Ini panduan praktikal, bukan ujian threshold. Jika HR luar biasa tinggi atau badan tidak selesa walaupun masih boleh bercakap, kurangkan usaha dan semak keadaan; jangan abaikan bacaan.</p><p>Batas bawah zone dibundarkan ke atas. Batas atas berakhir 1 bpm sebelum zone berikutnya, supaya nombor tidak bertindih. Z5 termasuk HR maksimum. Bacaan bawah Z1 tidak bermaksud anda perlu berlari lebih laju.</p><p>Formula umur dan HRR masih anggaran; jam boleh menggunakan %HRR, %LTHR atau tetapan tersuai yang berbeza. Ujian threshold oleh profesional boleh membantu menetapkan zone khusus larian. Jika ada penyakit jantung, simptom atau ubat yang mengubah HR, bincang sasaran dengan doktor.</p><p>Sumber: <a href="https://pubmed.ncbi.nlm.nih.gov/11153730/" target="_blank" rel="noopener noreferrer">Tanaka et al., 2001</a> · <a href="https://my.clevelandclinic.org/health/articles/24649-heart-rate-reserve" target="_blank" rel="noopener noreferrer">Formula HRR · Cleveland Clinic</a> · <a href="https://www.cdc.gov/physical-activity-basics/measuring/index.html" target="_blank" rel="noopener noreferrer">Talk test · CDC</a> · <a href="https://www8.garmin.com/manuals/webhelp/GUID-607F08F6-33FC-40BF-9727-84E54043D82D/EN-US/GUID-30C91919-943C-44E9-8048-901AC0881AEA.html" target="_blank" rel="noopener noreferrer">Kaedah zone Garmin</a>. Rentas tidak berafiliasi dengan Garmin.</p></div></details>
+    </section>
+    <section id="workouts-view" class="view" aria-labelledby="workouts-title" hidden>
+      <div class="section-title"><div><h2 id="workouts-title">Ada tujuan untuk setiap zone.</h2><p>Zone 2 untuk berjalan atau jog ringan. Larian easy boleh masuk Zone 3.</p></div><span id="menu-hr-badge" class="method-label"></span></div>
+      <div class="menu-note"><strong>Jangan paksa lari dalam Zone 2.</strong><span>Easy Z3 · 10KM Z4 · 5KM Z4→Z5</span></div>
+      <div id="workout-grid" class="workout-grid"></div>
+      <div class="info-strip"><span class="info-mark" aria-hidden="true">i</span><div><strong>Contoh sesi, bukan arahan untuk habiskan semuanya.</strong><p>Killer dan 4×4 untuk pelari yang sudah ada asas. HR mengambil masa untuk naik; jangan pecut semata-mata untuk mengejar zone. Untuk beginner, mulakan dengan Easy pendek atau Run–Walk.</p></div></div>
+    </section>
+    <section id="planner-view" class="view" aria-labelledby="planner-title" hidden>
+      <div class="section-title"><div><h2 id="planner-title">Bina minggu larian anda.</h2><p>Susun latihan ikut rutin semasa, bukan semata-mata sasaran.</p></div><span class="method-label">SATU MINGGU · BOLEH DIUBAH</span></div>
+      <div class="planner-grid"><section class="card planner-input"><div class="card-heading"><span class="mini-icon" aria-hidden="true">03</span><h3>Rutin & sasaran</h3></div>
+        <form id="plan-form">
+          <label for="level">Tahap sekarang</label><select id="level"><option value="beginner">Baru mula / kembali selepas lama berhenti</option><option value="base">Sudah berlari, sedang bina asas</option><option value="consistent">Konsisten sekurang-kurangnya 8 minggu</option></select>
+          <label for="goal">Fokus latihan</label><select id="goal"><option value="habit">Bina rutin & stamina</option><option value="5k">Bersedia untuk 5KM</option><option value="10k">Bersedia untuk 10KM</option></select>
+          <div class="two-inputs"><div><label for="weekly-min">Minit seminggu sekarang</label><input id="weekly-min" type="number" min="0" max="600" step="1" value="60" required></div><div><label for="longest-min">Sesi terpanjang yang selesa</label><input id="longest-min" type="number" min="10" max="180" step="1" value="25" required></div></div><p class="hint">Purata 2–4 minggu terkini; termasuk warm-up dan cooldown. Isi 0 minit seminggu jika belum mula. Nilai asal ialah contoh.</p>
+          <fieldset class="days-field"><legend>Hari yang boleh berlari <span>2–5 hari</span></legend><div class="day-picker" id="day-picker"></div></fieldset>
+          <label class="check-row"><input id="quality" type="checkbox"><span>Masukkan satu sesi hard jika sesuai</span></label><p class="hint">Hanya untuk tahap konsisten, ≥120 minit seminggu dan sesi selesa ≥45 minit. Hari hard dan larian terpanjang mesti berjarak.</p>
+          <p id="plan-error" class="error" role="alert" hidden></p><button class="primary full" type="submit">Bina pelan saya <span aria-hidden="true">↗</span></button>
+        </form>
+      </section><section id="plan-result" aria-live="polite" class="plan-result"></section></div>
+      <div class="info-strip"><span class="info-mark" aria-hidden="true">i</span><div><strong>Pelan permulaan, bukan jaminan masa perlumbaan.</strong><p>Rentas menyusun satu minggu berdasarkan input anda; bukan pelan progresif atau penilaian kesihatan. Ulang minggu yang selesa dahulu. Kurangkan atau rehat jika sakit atau terlalu letih. Jangan naikkan masa dan intensiti serentak.</p></div></div>
+    </section>
+    <aside class="safety-note"><strong>Dengar badan, bukan jam sahaja.</strong> Hentikan latihan jika sakit dada, hampir pitam atau sesak nafas luar biasa. Dapatkan rawatan segera jika simptom serius. Ini panduan umum, bukan nasihat perubatan peribadi.</aside>
+    <footer><span class="wordmark small">RENTAS<span class="brand-slash" aria-hidden="true">/</span></span><span>All paces are welcome.</span><span>Everywhere is a route.</span></footer>
+  </main>
+  <dialog id="workout-dialog" aria-labelledby="dialog-title"><div id="dialog-content"></div><button id="close-dialog" class="close-button" aria-label="Tutup butiran latihan">×</button></dialog>
+  <noscript><p class="error">Aktifkan JavaScript untuk menggunakan kalkulator dan pelan latihan Rentas.</p></noscript>
+</body></html>
