@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Rentas — HR Zone & Pelan Larian</title>
+  <meta name="description" content="Kenali HR zone anda, pilih menu latihan dan bina pelan larian mingguan. Mudah difahami, ikut kemampuan sendiri.">
+  <meta name="theme-color" content="#115ce8">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./refinements.css">
+  <link rel="stylesheet" href="./brand-tools.css">
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Terus ke kandungan</a>
+  <header class="topbar"><div class="top-inner"><a class="wordmark" href="./" aria-label="Rentas, halaman utama"><img class="wordmark-art" src="./assets/rentas-wordmark-transparent.png" alt="Rentas — Everywhere is a route."></a><a class="edition" href="./#about">ABOUT RENTAS</a><button id="auth-button" class="auth-button" type="button">Log masuk</button></div></header>
+  <main id="main" class="shell">
+    <div class="page-heading"><div><p class="eyebrow">YOUR PACE. YOUR PROGRESS.</p><h1>Lari ikut kemampuan. Latih dengan tujuan.</h1><p>Kenali HR zone anda dan susun latihan ikut tahap, sasaran dan masa yang ada.</p></div><span class="audience-label">Untuk pelari dewasa · 18–85 tahun</span></div>
+    <nav class="section-nav" aria-label="Alat latihan"><a href="#zones" data-view="zones" class="active" aria-current="page"><span>01</span> HR Zone</a><a href="#workouts" data-view="workouts"><span>02</span> Menu latihan</a><a href="#planner" data-view="planner"><span>03</span> Pelan mingguan</a><a href="./" class="home-link">← Utama</a></nav>
+    <section id="zones-view" class="view" aria-labelledby="zones-title">
+      <div class="section-title"><div><h2 id="zones-title">Kenali HR zone anda.</h2><p>Pilih satu kaedah, kemudian isi maklumat yang diperlukan.</p></div><span id="zone-basis-badge" class="method-label">HRR / KARVONEN</span></div>
+      <div class="calculator-grid">
+        <section class="card input-card" aria-labelledby="profile-title"><div class="card-heading"><span class="mini-icon" aria-hidden="true">01</span><h3 id="profile-title">Tentang rutin anda</h3></div>
+          <form id="hr-form"><label for="hr-type">1. Pilih method</label><select id="hr-type" required><option value="" disabled selected>Pilih method…</option><option value="tanaka">Method Tanaka</option><option value="hrr">Method Karvonen</option></select>
+          <fieldset id="age-field" hidden disabled><label for="age">2. Umur anda</label><div class="unit-input"><input id="age" type="number" min="18" max="85" step="1" required><span>tahun</span></div></fieldset>
+          <fieldset id="manual-field" hidden disabled><label for="manual-max">2. HR maksimum yang diketahui</label><div class="unit-input"><input id="manual-max" type="number" min="100" max="240" step="1" required><span>bpm</span></div><p class="hint">Bukan HR purata atau resting HR. Gunakan rekod yang boleh dipercayai.</p></fieldset>
+          <fieldset id="resting-field" hidden disabled><label for="resting-hr">3. Resting HR</label><div class="unit-input"><input id="resting-hr" type="number" min="30" max="100" step="1" required><span>bpm</span></div><p class="hint">Bacaan ketika rehat. Had input alat ini bukan pengesahan bacaan normal.</p></fieldset>
+          <details id="formula-card" class="formula-card" hidden><summary>Formula & kiraan anda</summary><strong id="formula"></strong><p id="formula-detail"></p><p id="max-formula-detail"></p></details>
+          <p id="hr-error" class="error" role="alert" hidden></p><button type="submit" class="primary full">Kira HR zone <span aria-hidden="true">↗</span></button></form>
+          <p class="privacy-note">Tiada akaun diperlukan. Input tidak dihantar ke pelayan dan akan reset bila halaman dimuat semula.</p>
+        </section>
+        <div class="results-column" id="hr-results" aria-live="polite"></div>
+      </div>
+      <details class="reference-details"><summary>Fahami zone, cuaca & formula</summary><div><p>Zone ialah julat rujukan, bukan ukuran ambang aerobik atau laktat. Untuk sesi ringan, pastikan boleh berbual; berjalan juga latihan.</p><p>Method Tanaka: HRmaks = 208 − (0.7 × umur). Method Karvonen: resting HR + peratus × (HRmaks − resting HR). Nombor zone sama tidak bermaksud intensiti sama antara kaedah. Formula umur ialah anggaran.</p><p>Dalam cuaca panas, kurangkan usaha atau masa; jangan naikkan had HR. Jika ada penyakit jantung, simptom atau ubat yang mengubah HR, dapatkan panduan doktor sebelum latihan hard.</p><p><a href="https://pubmed.ncbi.nlm.nih.gov/11153730/" target="_blank" rel="noopener noreferrer">Tanaka</a> · <a href="https://www.ntnu.edu/cerg/advice" target="_blank" rel="noopener noreferrer">NTNU</a> · <a href="https://www.cdc.gov/physical-activity-basics/measuring/index.html" target="_blank" rel="noopener noreferrer">Talk test</a></p></div></details>
+    </section>
+    <section id="workouts-view" class="view" aria-labelledby="workouts-title" hidden>
+      <div class="section-title"><div><h2 id="workouts-title">Rentas Sessions</h2><p>Pilih sesi daripada easy hingga hard. Z1 untuk berjalan / pulih.</p></div><span id="menu-hr-badge" class="method-label"></span></div>
+      <div class="menu-note"><strong>Ringkasan sesi di sini.</strong><span>🔒 Arahan penuh dibuka selepas log masuk. Warm-up, recovery dan cooldown dikira berasingan.</span></div>
+      <div class="library-intro"><strong>Start where you are.</strong><span>Mulakan dengan sesi yang boleh anda ulang. Sesi lain akan terbuka apabila anda bersedia.</span></div>
+      <div id="workout-grid" class="workout-grid"></div>
+      <div class="info-strip"><span class="info-mark" aria-hidden="true">i</span><div><strong>Contoh sesi, bukan arahan untuk habiskan semuanya.</strong><p>Sesi hard untuk pelari yang sudah ada asas. Pemula: pilih Run–Walk atau Z2 selesa; berjalan apabila perlu.</p></div></div>
+    </section>
+    <section id="planner-view" class="view" aria-labelledby="planner-title" hidden>
+      <div class="section-title"><div><h2 id="planner-title">Cadangan program larian.</h2><p>Semak cadangan latihan dan simpan program anda.</p></div><span id="program-duration-label" class="method-label">PROGRAM BELUM DIPILIH</span></div>
+      <div class="planner-grid"><section class="card planner-input"><div class="card-heading"><span class="mini-icon" aria-hidden="true">03</span><h3>Rutin & sasaran</h3></div>
+        <form id="plan-form">
+          <label for="level">Tahap sekarang</label><select id="level"><option value="beginner">Baru mula / kembali selepas lama berhenti</option><option value="base">Sudah berlari, sedang bina asas</option><option value="consistent">Konsisten sekurang-kurangnya 8 minggu</option></select>
+<label for="goal">Apa yang anda mahu capai?</label><select id="goal"><option value="habit">Bina rutin & stamina</option><option value="5k">Bersedia untuk 5KM</option><option value="10k">Bersedia untuk 10KM</option></select>
+          <div class="two-inputs"><div><label for="weekly-min">Biasanya, berapa minit anda berlari seminggu?</label><input id="weekly-min" type="number" min="0" max="600" step="1" value="60" required></div><div><label for="longest-min">Sesi terpanjang yang selesa</label><input id="longest-min" type="number" min="10" max="180" step="1" value="25" required></div></div><p class="hint">Isi rutin sebenar 2–4 minggu terkini, termasuk warm-up dan cooldown. Isi 0 jika belum mula; nilai asal ialah contoh.</p>
+          <fieldset class="days-field"><legend>Hari yang boleh berlari <span>2–5 hari</span></legend><div class="day-picker" id="day-picker"></div></fieldset>
+          <label class="check-row"><input id="quality" type="checkbox"><span>Masukkan satu sesi hard jika sesuai</span></label><p class="hint">Tidak automatik. Jika belum layak, sebabnya muncul pada pelan. Jangan naikkan input semata-mata untuk membuka sesi hard.</p>
+          <p id="plan-error" class="error" role="alert" hidden></p><button class="primary full" type="submit">Lihat cadangan program <span aria-hidden="true">↗</span></button>
+        </form>
+      </section><section id="plan-result" aria-live="polite" class="plan-result"></section></div><div class="program-save-bar"><button id="save-program" class="primary" type="button" hidden>Mula program</button><p id="save-status" role="status"></p></div>
+      <div class="info-strip"><span class="info-mark" aria-hidden="true">i</span><div><strong>Pelan permulaan, bukan jaminan masa perlumbaan.</strong><p>Rentas menyusun satu minggu berdasarkan input anda; bukan pelan progresif atau penilaian kesihatan. Ulang minggu yang selesa dahulu. Kurangkan atau rehat jika sakit atau terlalu letih. Jangan naikkan masa dan intensiti serentak.</p></div></div>
+    </section>
+    <aside class="safety-note"><strong>Dengar badan, bukan jam sahaja.</strong> Hentikan latihan jika sakit dada, hampir pitam atau sesak nafas luar biasa. Dapatkan rawatan segera jika simptom serius. Ini panduan umum, bukan nasihat perubatan peribadi.</aside>
+    <footer><span class="wordmark small"><img class="wordmark-art" src="./assets/rentas-wordmark-transparent.png" alt="Rentas — Everywhere is a route."></span><span>All paces are welcome.</span></footer>
+  </main>
+  <dialog id="workout-dialog" aria-labelledby="dialog-title"><div id="dialog-content"></div><button id="close-dialog" class="close-button" aria-label="Tutup butiran latihan">×</button></dialog>
+  <dialog id="auth-dialog" aria-labelledby="auth-title"><div class="auth-dialog-content"><p class="dialog-eyebrow">RENTAS ACCOUNT</p><h2 id="auth-title">Simpan rutin anda.</h2><p id="auth-copy">Log masuk dengan email. Kami hantar kod 6 digit — tiada password diperlukan.</p><form id="auth-form"><label for="auth-email">Email</label><input id="auth-email" type="email" autocomplete="email" placeholder="nama@email.com" required><div id="profile-fields" hidden><label for="profile-name">Nama panggilan <span>(optional)</span></label><input id="profile-name" type="text" maxlength="60" autocomplete="name" placeholder="Contoh: Aizzuan"><label for="profile-goal">Fokus utama</label><select id="profile-goal"><option value="habit">Bina rutin</option><option value="5k">5KM</option><option value="10k">10KM</option></select></div><div id="otp-field" hidden><label for="auth-otp">Kod OTP</label><input id="auth-otp" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="123456"><p class="hint">Semak inbox atau folder spam anda.</p></div><p id="auth-error" class="error" role="alert" hidden></p><button id="auth-submit" class="primary full" type="submit">Hantar kod <span aria-hidden="true">↗</span></button></form><button id="auth-cancel" class="text-button" type="button">Tutup</button></div><button id="auth-close" class="close-button" aria-label="Tutup log masuk">×</button></dialog>
+  <noscript><p class="error">Aktifkan JavaScript untuk menggunakan kalkulator dan pelan latihan Rentas.</p></noscript>
+</body></html>

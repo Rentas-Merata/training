@@ -1,0 +1,15 @@
+#hr-form fieldset{border:0;padding:0;margin:22px 0 0;min-width:0}
+summary{cursor:pointer;font-weight:600;font-size:.875rem}
+.hint,.fineprint,.method-label,td small{font-size:.875rem}
+.workout-card .workout-sub{min-height:0}
+.workout-card .workout-metrics{margin:18px 0}
+.workout-metrics strong{font-size:1.15rem}
+.plan-summary p{margin:5px 0}
+.plan-message{margin-top:18px}
+td{vertical-align:top}
+#dialog-content>p{font-size:1rem}
+.reference-details{margin:22px 0}
+.reference-details>div{padding-top:12px}
+/* Authentication */
+.program-progress{border:1px solid var(--line,#d7dee8);border-radius:14px;padding:1rem;margin-bottom:1rem;background:rgba(17,92,232,.04);display:grid;gap:.45rem}.program-progress span{color:#5e6b7a;font-size:.9rem}.program-progress small{color:#5e6b7a}.progress-track{height:7px;background:#e4eaf2;border-radius:99px;overflow:hidden}.progress-track i{display:block;height:100%;background:#115ce8;border-radius:inherit}
+.auth-button{margin-left:auto;border:1px solid var(--line,#d7dee8);background:transparent;color:inherit;border-radius:999px;padding:.55rem .9rem;font:inherit;font-size:.78rem;cursor:pointer;white-space:nowrap}.auth-button.signed-in{background:#115ce8;color:#fff;border-color:#115ce8}.auth-dialog-content{min-width:min(88vw,420px);padding:1.4rem}.auth-dialog-content h2{margin:.2rem 0 .5rem}.auth-dialog-content form{display:grid;gap:.55rem}.auth-dialog-content input,.auth-dialog-content select{width:100%;box-sizing:border-box}.auth-dialog-content label{margin-top:.35rem}.auth-dialog-content label span{opacity:.6;font-weight:400}.text-button{border:0;background:transparent;text-decoration:underline;cursor:pointer;margin:1rem auto 0;display:block;color:inherit}.auth-dialog-content .hint{margin:.1rem 0 .4rem}.auth-dialog-content .error{margin:.4rem 0 0}@media(max-width:600px){.brand-description,.edition{display:none}.auth-button{font-size:.72rem}}

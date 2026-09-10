@@ -1,0 +1,22 @@
+:root{--blue:#2052d9;--ink:#151719;--bg:#f6f7f9;--surface:#fff;--line:#d8dce3;--muted:#5b6370}
+body{background:var(--bg);color:var(--ink)}.topbar{background:#fff;border-bottom:1px solid var(--line)}
+.wordmark{font-style:italic;font-weight:950;letter-spacing:-2px;color:var(--ink)}.brand-slash{color:var(--blue)}.brand-description,.edition{color:var(--muted)}
+.auth-button,.primary{background:var(--blue)}.section-nav a.active{color:var(--blue);border-color:var(--blue)}
+.card,.workout-card{background:var(--surface);border-color:var(--line);border-radius:4px;box-shadow:none}.section-title h2{letter-spacing:-.045em}
+.section-title{background:var(--ink);color:#fff;padding:24px 25px;border-top:4px solid var(--blue)}.section-title p{color:#cbd1dc}.section-title .method-label{background:#dce6fb;color:var(--blue);border-color:#dce6fb}
+.section-title p,.hint,.fineprint,.menu-note span{color:var(--muted)}.workout-grid{gap:16px}.workout-card{overflow:hidden;padding:0 18px 18px}.workout-top{padding-top:18px}.workout-card h3{margin-top:20px;letter-spacing:-.03em}
+.workout-card{position:relative}.workout-card:before{content:"";display:block;height:8px;margin:0 -18px 0;background:#dfe8fb}.workout-card.category-recovery:before{background:#dfe8fb}.workout-card.category-beginner:before{background:#c9d9f7}.workout-card.category-easy:before{background:#b8c9ee}.workout-card.category-sederhana:before{background:#8ea8df}.workout-card.category-hard:before{background:#f1d9a7}
+.tag{border-radius:2px}.outline-button{color:var(--blue);border-color:#aab8db;background:#fff}.info-strip{border-color:#b9c7e5;background:#edf2ff}.info-mark{background:var(--blue)}
+input,select{background:#fff;border-color:#aeb5c0;border-radius:3px}.primary{border-radius:3px}.program-progress,.plan-summary,.week-list,.plan-message{border-color:var(--line)}.progress-track i{background:var(--blue)}
+.program-save-bar{display:flex;align-items:center;gap:16px;margin-top:18px}.program-save-bar p{margin:0;color:var(--muted);font-size:.9rem}.signature-key{display:flex;align-items:center;gap:9px;margin:25px 0 10px;color:var(--muted);font-size:.85rem}.signature-key strong{color:var(--blue)}footer{color:var(--muted);border-top-color:var(--line)}
+.session-art{height:76px;margin:0 -18px 0;padding:14px 18px;display:flex;align-items:end;background:#e8eefb;overflow:hidden}.session-art span{font-size:4.5rem;line-height:.8;font-weight:900;letter-spacing:-.09em;font-style:italic;color:#b7c8ed}.category-beginner .session-art{background:#eef3fc}.category-easy .session-art{background:#e3ebfa}.category-sederhana .session-art{background:#d7e2f7}.category-hard .session-art{background:#fff3df}.category-hard .session-art span{color:#e6c47b}.category-sederhana .session-art span{color:#8da9df}.workout-card h3{font-size:1.35rem}.dialog-lock{margin:22px 0;padding:18px 20px;background:#fff3d9;border-left:4px solid #d99b2b}.dialog-lock strong{display:block}.dialog-lock p{margin:5px 0 13px;color:#6b5733;font-size:.88rem}.dialog-lock .primary{width:auto}
+.workout-card.is-locked{background:#f1f3f6;border-color:#d4d9e1}.workout-card.is-locked .workout-top,.workout-card.is-locked h3,.workout-card.is-locked .workout-sub,.workout-card.is-locked .workout-metrics{opacity:.7}.workout-card.is-locked .outline-button{background:#fff7e7;border-color:#e3c478;color:#8a5d08}.workout-card.is-open{border-top:3px solid var(--blue)}
+.library-intro{display:flex;gap:14px;align-items:baseline;margin:25px 0 15px;padding:16px 18px;background:#e9eef8;border-left:4px solid var(--blue)}.library-intro strong{font-size:1.05rem}.library-intro span{color:var(--muted);font-size:.9rem}
+.wordmark{display:inline-flex;flex-direction:column;align-items:flex-start;font-style:normal;font-weight:900;letter-spacing:0;line-height:1;text-decoration:none}
+.wordmark-art{display:block;width:178px;height:auto}
+.wordmark-word{font-size:1.8rem;letter-spacing:-.075em;line-height:.9}
+.wordmark-r{color:var(--blue)}
+.wordmark-tagline{margin-top:5px;color:var(--muted);font-size:.31rem;font-weight:700;letter-spacing:.14em;line-height:1.2;white-space:nowrap}
+.wordmark.small .wordmark-word{font-size:1.35rem}.wordmark.small .wordmark-tagline{font-size:.27rem;margin-top:4px}
+@media(max-width:700px){.brand-description,.edition{display:none}.top-inner{gap:12px}.session-art{height:66px}.session-art span{font-size:3.8rem}}
+@media(max-width:700px){.program-save-bar{display:block}.program-save-bar .primary{width:100%;margin-bottom:8px}}
