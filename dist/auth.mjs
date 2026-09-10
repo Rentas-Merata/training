@@ -14,18 +14,22 @@ export async function currentUser() {
 }
 
 export function onAuthChange(callback) {
-  return supabase.auth.onAuthStateChange((_event, session) => callback(session?.user ?? null));
-}
-
-export async function requestEmailOtp(email) {
-  return supabase.auth.signInWithOtp({
-    email,
-    options: { shouldCreateUser: true }
+  return supabase.auth.onAuthStateChange((_event, session) => {
+    setTimeout(() => callback(session?.user ?? null), 0);
   });
 }
 
-export async function verifyEmailOtp(email, token) {
-  return supabase.auth.verifyOtp({ email, token, type: 'email' });
+export async function requestEmailLink(email, profile = {}) {
+  // This page loads the Supabase client and consumes the returned session.
+  const emailRedirectTo = new URL('./tools.html', window.location.href).href;
+  return supabase.auth.signInWithOtp({
+    email,
+    options: {
+      shouldCreateUser: true,
+      emailRedirectTo,
+      data: { display_name: (profile.name || '').trim(), running_goal: profile.goal || 'habit' }
+    }
+  });
 }
 
 export async function saveProfile(profile) {

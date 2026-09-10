@@ -1,9 +1,9 @@
 import {DAYS} from './training.mjs';
 import {WORKOUTS,totalMinutes,generatePlan} from './sessions.mjs';
 import {profileFields,resolveProfile,workoutRange} from './profile.mjs';
-import {currentUser,onAuthChange,requestEmailOtp,verifyEmailOtp,saveProfile,signOut,saveProgram,getActiveProgram} from './auth.mjs';
+import {currentUser,onAuthChange,requestEmailLink,signOut,saveProgram,getActiveProgram} from './auth.mjs';
 const $=id=>document.getElementById(id);
-let hr=null,plan=null,dialogWorkout=null,planStarted=false,user=null,otpRequested=false,pendingRoute=null,activeProgram=null;
+let hr=null,plan=null,dialogWorkout=null,planStarted=false,user=null,linkRequested=false,pendingRoute=null,activeProgram=null;
 const duration=s=>`${Math.floor(s/60)} minit${s%60?' '+s%60+' saat':''}`;
 const basis=()=>hr?.basis==='hrr'?'Method Karvonen · %HRR':'Method Tanaka · %HRmaks';
 function guidance(s){if(s.walk)return 'Jalan / jog selesa<small>Tiada bpm wajib</small>';const g=workoutRange(s.zones,hr,s.protocol);return `${g.title}<small>${g.detail}</small>`;}
@@ -11,12 +11,50 @@ function showView(){let key=['zones','workouts','planner'].includes(location.has
 addEventListener('hashchange',showView);
 
 function renderAuth(){const b=$('auth-button');b.textContent=user?`Hi, ${user.user_metadata?.display_name||user.email.split('@')[0]}`:'Log masuk';b.classList.toggle('signed-in',!!user);if(user){b.title='Klik untuk log keluar';}renderMenu();showView();}
-function resetAuthForm(){otpRequested=false;$('auth-form').reset();$('otp-field').hidden=true;$('profile-fields').hidden=true;$('auth-otp').required=false;$('auth-submit').innerHTML='Hantar kod <span aria-hidden="true">↗</span>';$('auth-copy').textContent='Log masuk dengan email. Kami hantar kod 6 digit — tiada password diperlukan.';}
-function openAuth(reason=''){if(user)return;resetAuthForm();pendingRoute=reason||null;if(reason==='planner')$('auth-copy').textContent='Pelan mingguan ialah ruang peribadi anda. Log masuk dengan email untuk buka dan simpan rutin.';$('auth-dialog').showModal();$('auth-email').focus();}
+function resetAuthForm(){
+  linkRequested=false;$('auth-form').reset();$('profile-fields').hidden=false;
+  $('auth-error').hidden=true;$('auth-submit').disabled=false;
+  $('auth-email').readOnly=false;
+  $('auth-submit').textContent='Hantar link';
+  $('auth-copy').textContent='Kami hantar link pengesahan ke email anda. Klik link itu untuk masuk — tiada password diperlukan.';
+}
+function openAuth(reason=''){
+  if(user)return;resetAuthForm();pendingRoute=reason||null;
+  if(!$('auth-dialog').open)$('auth-dialog').showModal();$('auth-email').focus();
+}
 $('auth-button').addEventListener('click',async()=>{if(user){await signOut();return;}openAuth();});
-$('auth-cancel').addEventListener('click',()=>{resetAuthForm();$('auth-dialog').close();});$('auth-close').addEventListener('click',()=>{resetAuthForm();$('auth-dialog').close();});
-$('auth-form').addEventListener('submit',async e=>{e.preventDefault();const email=$('auth-email').value.trim();const error=$('auth-error');error.hidden=true;$('auth-submit').disabled=true;try{if(!otpRequested){const result=await requestEmailOtp(email);if(result.error)throw result.error;otpRequested=true;$('otp-field').hidden=false;$('profile-fields').hidden=false;$('auth-submit').innerHTML='Sahkan kod <span aria-hidden="true">↗</span>';$('auth-otp').required=true;$('auth-otp').focus();$('auth-copy').textContent='Kod sudah dihantar. Masukkan 6 digit kod untuk masuk.';}else{const result=await verifyEmailOtp(email,$('auth-otp').value.trim());if(result.error)throw result.error;await saveProfile({name:$('profile-name').value.trim(),goal:$('profile-goal').value});$('auth-dialog').close();otpRequested=false;$('auth-form').reset();} }catch(err){error.textContent=err.message||'Tidak berjaya. Cuba lagi.';error.hidden=false;}finally{$('auth-submit').disabled=false;}});
-onAuthChange(async next=>{user=next;renderAuth();if(user){try{activeProgram=await getActiveProgram(user.id);if(activeProgram?.program_weeks?.length&&plan){const current=activeProgram.program_weeks.find(w=>w.status==='current')||activeProgram.program_weeks[0];plan=current.plan;renderPlan();}}catch(err){console.error(err);}}if(user&&$('auth-dialog').open){$('auth-dialog').close();otpRequested=false;$('auth-form').reset();if(pendingRoute==='planner'){pendingRoute=null;location.hash='planner';}}});currentUser().then(next=>{user=next;renderAuth();});
+for(const id of ['auth-cancel','auth-close'])$(id).addEventListener('click',()=>{resetAuthForm();$('auth-dialog').close();});
+$('auth-form').addEventListener('submit',async e=>{
+  e.preventDefault();if(linkRequested)return;
+  const error=$('auth-error');error.hidden=true;$('auth-submit').disabled=true;
+  try{
+    const result=await requestEmailLink($('auth-email').value.trim(),{name:$('profile-name').value.trim(),goal:$('profile-goal').value});
+    if(result.error)throw result.error;
+    linkRequested=true;$('auth-email').readOnly=true;$('profile-fields').hidden=true;
+    $('auth-copy').textContent='Semak inbox atau folder spam. Klik link dalam email terbaru untuk masuk ke Rentas.';
+    $('auth-submit').textContent='Link sudah dihantar';
+  }catch(err){error.textContent=err.message||'Link belum berjaya dihantar. Cuba lagi.';error.hidden=false;$('auth-submit').disabled=false;}
+});
+let authRevision=0;
+onAuthChange(async next=>{
+  const revision=++authRevision;user=next;activeProgram=null;renderAuth();
+  if(!user)return;
+  if($('auth-dialog').open){$('auth-dialog').close();resetAuthForm();}
+  if(pendingRoute==='planner'){pendingRoute=null;location.hash='planner';}
+  try{
+    const loaded=await getActiveProgram(next.id);
+    if(revision!==authRevision)return;
+    activeProgram=loaded;
+    const current=loaded?.program_weeks?.find(w=>w.status==='current');
+    if(current?.plan){plan=current.plan;renderPlan();}
+  }catch(err){console.error('Program belum dapat dimuatkan.');}
+});
+const authFragment=new URLSearchParams(location.hash.slice(1));
+if(authFragment.has('error')||authFragment.has('error_code')){
+  history.replaceState(null,'',location.pathname+location.search);
+  openAuth();$('auth-error').hidden=false;
+  $('auth-error').textContent='Link tidak sah atau sudah tamat tempoh. Minta link baru untuk masuk.';
+}
 function renderHR(){
   const type=$('hr-type').value,f=profileFields(type);
   for(const [id,on] of [['age-field',f.age],['manual-field',f.maximum],['resting-field',f.resting]]){$(id).hidden=!on;$(id).disabled=!on;}
